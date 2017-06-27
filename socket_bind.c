@@ -21,6 +21,7 @@ int socket_bind4_reuse(int s,char ip[4],uint16 port)
 {
   int opt = 1;
   setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&opt,sizeof opt);
+  setsockopt(s,SOL_SOCKET,SO_REUSEPORT,&opt,sizeof opt);
   return socket_bind4(s,ip,port);
 }
 
