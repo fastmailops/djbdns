@@ -118,7 +118,7 @@ static int doit(char *q,char qtype[2])
   int flagauthoritative;
   char x[20];
   uint16 u16;
-  char addr[8][4];
+  char addr[64][4];
   int addrnum;
   uint32 addrttl;
   int i;
@@ -163,8 +163,8 @@ static int doit(char *q,char qtype[2])
       if (byte_equal(type,2,DNS_T_A) && (dlen - dpos == 4)) {
 	addrttl = ttl;
 	i = dns_random(addrnum + 1);
-	if (i < 8) {
-	  if ((i < addrnum) && (addrnum < 8))
+	if (i < 64) {
+	  if ((i < addrnum) && (addrnum < 64))
 	    byte_copy(addr[addrnum],4,addr[i]);
 	  byte_copy(addr[i],4,data + dpos);
 	}
@@ -190,7 +190,7 @@ static int doit(char *q,char qtype[2])
       response_rfinish(RESPONSE_ANSWER);
     }
     for (i = 0;i < addrnum;++i)
-      if (i < 8) {
+      if (i < 64) {
 	if (!response_rstart(q,DNS_T_A,addrttl)) return 0;
 	if (!response_addbytes(addr[i],4)) return 0;
 	response_rfinish(RESPONSE_ANSWER);

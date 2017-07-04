@@ -3402,7 +3402,7 @@ index da7420d..d3e473e 100644
 @@ -119,8 +120,9 @@ static int doit(char *q,char qtype[2])
    char x[20];
    uint16 u16;
-   char addr[8][4];
+   char addr[64][4];
 -  int addrnum;
 -  uint32 addrttl;
 +  char addr6[8][16];
